@@ -3,148 +3,111 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>INSTAGRAM REEL DOWNLOADER</title>
+<title>Instagram Reel Downloader</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-gradient(135deg,#0a0a0a,#1a1a1a);color:#fff;min-height:100vh}
-.container{max-width:800px;margin:0 auto;padding:20px}
-.header{display:flex;justify-content:space-between;align-items:center;padding:20px 0;border-bottom:1px solid #333;margin-bottom:40px}
-.logo{display:flex;align-items:center;gap:10px}
-.logo-icon{width:40px;height:40px;background:linear-gradient(45deg,#00ff88,#00cc6a);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;color:#000}
-.logo-text{font-size:22px;font-weight:bold;color:#00ff88;letter-spacing:1px}
-.main-content{text-align:center;padding:40px 0}
-.title{font-size:36px;font-weight:bold;color:#00ff88;margin-bottom:20px;text-shadow:0 0 20px rgba(0,255,136,0.3)}
-.subtitle{font-size:16px;color:#888;margin-bottom:10px;letter-spacing:3px;text-transform:uppercase}
-.search-section{max-width:600px;margin:30px auto;background:rgba(255,255,255,0.05);border:1px solid #333;border-radius:20px;padding:30px}
-.input-label{display:block;color:#888;font-size:14px;margin-bottom:10px;text-transform:uppercase}
-.input-box{width:100%;padding:15px 20px;border:none;border-radius:15px;background:#1a1a1a;color:#fff;font-size:16px}
-.search-button{margin-top:20px;width:100%;background:linear-gradient(45deg,#00ff88,#00cc6a);color:#000;border:none;padding:16px;font-size:18px;font-weight:bold;border-radius:15px;cursor:pointer;transition:.3s}
-.search-button:hover{box-shadow:0 8px 20px rgba(0,255,136,.3)}
-.result-section{display:none;margin-top:40px}
-video{width:100%;border-radius:15px;margin-top:20px}
-.download-link{display:inline-block;margin-top:15px;background:#00ff88;color:#000;padding:12px 25px;border-radius:8px;font-weight:bold;text-decoration:none;transition:.3s}
-.download-link:hover{background:#00cc6a}
-.error{color:#ff4444;margin-top:20px;font-weight:bold}
-.footer{text-align:center;padding:40px 0;border-top:1px solid #333;margin-top:60px;color:#666;font-size:14px}
-
-/* Floating Buttons */
-.floating-buttons {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
+body {
+  background: #0a0a0a;
+  color: #fff;
+  font-family: 'Segoe UI', sans-serif;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  z-index: 999;
-}
-.float-btn {
-  width: 55px;
-  height: 55px;
-  border-radius: 50%;
-  display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  transition: transform 0.2s ease;
+  height: 100vh;
+  text-align: center;
 }
-.float-btn img {
-  width: 28px;
-  height: 28px;
+h1 { color: #00ff88; margin-bottom: 20px; letter-spacing: 2px; }
+input {
+  width: 80%;
+  max-width: 400px;
+  padding: 12px;
+  border: 2px solid #00ff88;
+  border-radius: 10px;
+  background: #1a1a1a;
+  color: #fff;
+  outline: none;
+  margin-bottom: 20px;
 }
-.float-btn:hover {
-  transform: scale(1.1);
+button {
+  background: linear-gradient(45deg, #00ff88, #00cc6a);
+  color: #000;
+  font-weight: bold;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
-.float-btn.whatsapp {
-  background: #25D366;
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
 }
-.float-btn.instagram {
-  background: #E1306C;
+#result {
+  margin-top: 30px;
+}
+video {
+  width: 90%;
+  max-width: 400px;
+  margin-top: 15px;
+  border-radius: 15px;
+  border: 2px solid #00ff88;
+}
+a.download-btn {
+  display: inline-block;
+  background: #00ff88;
+  color: #000;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin-top: 15px;
+  font-weight: bold;
 }
 </style>
 </head>
 <body>
-<div class="container">
-<header class="header">
-  <div class="logo">
-    <div class="logo-icon">♦</div>
-    <div class="logo-text">INSTAGRAM REEL DOWNLOADER</div>
-  </div>
-</header>
+  <h1>Instagram Reel Downloader</h1>
+  <input type="text" id="instaLink" placeholder="Paste Instagram Reel Link Here">
+  <button onclick="downloadReel()">Download</button>
 
-<main class="main-content">
-  <h1 class="title">Instagram Reel Downloader</h1>
-  <p class="subtitle">Paste Reel Link Below</p>
-
-  <div class="search-section">
-    <label class="input-label">Reel URL</label>
-    <input type="text" id="reelLink" class="input-box" placeholder="https://www.instagram.com/reel/...">
-    <button id="downloadBtn" class="search-button">Download Reel</button>
-  </div>
-
-  <div class="result-section" id="resultSection">
-    <video id="videoPreview" controls></video>
-    <a id="downloadLink" class="download-link" target="_blank">Download Video</a>
-  </div>
-
-  <div id="error" class="error"></div>
-</main>
-
-<footer class="footer">Developed by R2H Team</footer>
-</div>
-
-<!-- Floating Buttons -->
-<div class="floating-buttons">
-  <a href="https://api.whatsapp.com/send/?phone=923336181194" target="_blank" class="float-btn whatsapp">
-    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
-  </a>
-  <a href="https://www.instagram.com/wtf._.rude._/" target="_blank" class="float-btn instagram">
-    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
-  </a>
-</div>
+  <div id="result"></div>
 
 <script>
-const btn = document.getElementById('downloadBtn');
-const input = document.getElementById('reelLink');
-const result = document.getElementById('resultSection');
-const video = document.getElementById('videoPreview');
-const link = document.getElementById('downloadLink');
-const errorDiv = document.getElementById('error');
+async function downloadReel() {
+  const link = document.getElementById('instaLink').value.trim();
+  const result = document.getElementById('result');
+  result.innerHTML = '';
 
-btn.addEventListener('click', async ()=>{
-  const url = input.value.trim();
-  if(!url.includes("instagram.com/reel")){
-    errorDiv.textContent = "❌ Please enter a valid Instagram Reel link!";
-    result.style.display = "none";
+  if (!link) {
+    result.innerHTML = '<p style="color:#ff5555;">Please paste a valid Instagram link.</p>';
     return;
   }
 
-  errorDiv.textContent = "⏳ Fetching download link...";
-  result.style.display = "none";
+  result.innerHTML = '<p>Fetching video... 🔄</p>';
 
   try {
-    const apiUrl = `https://www.snapinsta.app/action.php?url=${encodeURIComponent(url)}`;
-
-    const res = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(apiUrl)}`);
-    const data = await res.json();
+    const proxy = 'https://api.allorigins.win/get?url=';
+    const target = `https://ssinstagram.com/?url=${encodeURIComponent(link)}`;
+    const response = await fetch(proxy + encodeURIComponent(target));
+    const data = await response.json();
 
     const html = data.contents;
-    const videoUrlMatch = html.match(/https[^"]+\.mp4/);
+    const videoUrlMatch = html.match(/https:\/\/[^"]+\.mp4/);
 
     if (videoUrlMatch && videoUrlMatch[0]) {
       const videoUrl = videoUrlMatch[0];
-      video.src = videoUrl;
-      link.href = videoUrl;
-      errorDiv.textContent = "";
-      result.style.display = "block";
+      result.innerHTML = `
+        <video controls src="${videoUrl}"></video>
+        <br>
+        <a href="${videoUrl}" download class="download-btn">⬇ Download Video</a>
+      `;
     } else {
-      throw new Error("No video link found.");
+      result.innerHTML = '<p style="color:#ff5555;">Video not found. Try a different link.</p>';
     }
-
-  } catch (err) {
-    errorDiv.textContent = "⚠️ Error: Unable to fetch video. Try again.";
-    console.error(err);
+  } catch (error) {
+    console.error(error);
+    result.innerHTML = '<p style="color:#ff5555;">Failed to fetch video. Try again later.</p>';
   }
-});
+}
 </script>
 </body>
 </html>
