@@ -86,26 +86,27 @@ async function downloadReel() {
 
   try {
     const proxy = 'https://api.allorigins.win/get?url=';
-    const target = `https://ssinstagram.com/?url=${encodeURIComponent(link)}`;
+    const target = `https://snapinsta.app/action.php?url=${encodeURIComponent(link)}`;
     const response = await fetch(proxy + encodeURIComponent(target));
     const data = await response.json();
 
     const html = data.contents;
-    const videoUrlMatch = html.match(/https:\/\/[^"]+\.mp4/);
+    const match = html.match(/https:\/\/[^"]+\.mp4/);
 
-    if (videoUrlMatch && videoUrlMatch[0]) {
-      const videoUrl = videoUrlMatch[0];
+    if (match && match[0]) {
+      const videoUrl = match[0];
       result.innerHTML = `
         <video controls src="${videoUrl}"></video>
         <br>
         <a href="${videoUrl}" download class="download-btn">⬇ Download Video</a>
       `;
     } else {
-      result.innerHTML = '<p style="color:#ff5555;">Video not found. Try a different link.</p>';
+      result.innerHTML = '<p style="color:#ff5555;">No video found. Try another link.</p>';
     }
+
   } catch (error) {
     console.error(error);
-    result.innerHTML = '<p style="color:#ff5555;">Failed to fetch video. Try again later.</p>';
+    result.innerHTML = '<p style="color:#ff5555;">Error fetching data. Try again later.</p>';
   }
 }
 </script>
