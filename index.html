@@ -42,9 +42,7 @@ button:hover {
   transform: scale(1.05);
   box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
 }
-#result {
-  margin-top: 30px;
-}
+#result { margin-top: 30px; }
 video {
   width: 90%;
   max-width: 400px;
@@ -68,7 +66,6 @@ a.download-btn {
   <h1>Instagram Reel Downloader</h1>
   <input type="text" id="instaLink" placeholder="Paste Instagram Reel Link Here">
   <button onclick="downloadReel()">Download</button>
-
   <div id="result"></div>
 
 <script>
@@ -85,12 +82,13 @@ async function downloadReel() {
   result.innerHTML = '<p>Fetching video... 🔄</p>';
 
   try {
-    const apiUrl = `https://saveig.app/api/ajaxSearch?url=${encodeURIComponent(link)}&lang=en`;
+    // Using reliable public API (no CORS block)
+    const apiUrl = `https://instagram-downloader-api.vercel.app/?url=${encodeURIComponent(link)}`;
     const response = await fetch(apiUrl);
     const data = await response.json();
 
-    if (data && data.medias && data.medias.length > 0) {
-      const videoUrl = data.medias[0].url;
+    if (data && data.download_url) {
+      const videoUrl = data.download_url;
       result.innerHTML = `
         <video controls src="${videoUrl}"></video>
         <br>
@@ -99,7 +97,6 @@ async function downloadReel() {
     } else {
       result.innerHTML = '<p style="color:#ff5555;">No video found. Try another link.</p>';
     }
-
   } catch (error) {
     console.error(error);
     result.innerHTML = '<p style="color:#ff5555;">Error fetching data. Try again later.</p>';
