@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Instagram Reel Downloader</title>
+<title>Tiktok Video Downloader</title>
 <style>
 body {
   background: #0a0a0a;
@@ -83,7 +83,7 @@ async function downloadReel() {
 
   try {
     // Using reliable public API (no CORS block)
-    const apiUrl = `https://instagram-downloader-api.vercel.app/?url=${encodeURIComponent(link)}`;
+    const apiUrl = `https://tikwm.com/api/?url=${encodeURIComponent(link)}`;
     const response = await fetch(apiUrl);
     const data = await response.json();
 
