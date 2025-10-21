@@ -64,7 +64,7 @@ a.download-btn {
 </head>
 <body>
   <h1>Instagram Reel Downloader</h1>
-  <input type="text" id="instaLink" placeholder="Paste Instagram Reel Link Here">
+  <input type="text" id="instaLink" placeholder="Paste Tiktok Video Link Here">
   <button onclick="downloadReel()">Download</button>
   <div id="result"></div>
 
@@ -75,7 +75,7 @@ async function downloadReel() {
   result.innerHTML = '';
 
   if (!link) {
-    result.innerHTML = '<p style="color:#ff5555;">Please paste a valid Instagram link.</p>';
+    result.innerHTML = '<p style="color:#ff5555;">Please paste a valid Tiktok link.</p>';
     return;
   }
 
